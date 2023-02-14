@@ -20,7 +20,7 @@ jobs:
         run: |
           mv dist ventura-rawdata-panel
           zip ventura-rawdata-panel.zip ventura-rawdata-panel -r
-          md5 ventura-rawdata-panel.zip > ventura-rawdata-panel.txt
+          md5sum ventura-rawdata-panel.zip > ventura-rawdata-panel.txt
           cat ventura-rawdata-panel.txt
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
