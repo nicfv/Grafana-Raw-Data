@@ -15,7 +15,7 @@ jobs:
       - name: Compile Project
         run: yarn build
       - name: Compatibility Check
-        run: npx @grafana/levitate@latest is-compatible --path src/module.ts --target @grafana/data,@grafana/ui,@grafana/runtime
+        run: npx --yes @grafana/levitate@latest is-compatible --path src/module.tsx --target @grafana/data,@grafana/ui,@grafana/runtime
       - name: Package Project
         run: |
           mv dist ventura-rawdata-panel
