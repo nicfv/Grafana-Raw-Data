@@ -1,0 +1,38 @@
+{
+    "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+    "id": "ventura-rawdata-panel",
+    "type": "panel",
+    "name": "Raw Data",
+    "info": {
+        "author": {
+            "name": "Nicolas Ventura",
+            "url": "https://github.com/nicfv/Grafana-Raw-Data"
+        },
+        "description": "Outputs raw query data in JSON format.",
+        "links": [
+            {
+                "name": "GitHub",
+                "url": "https://github.com/nicfv/Grafana-Raw-Data"
+            },
+            {
+                "name": "License",
+                "url": "https://raw.githubusercontent.com/nicfv/Grafana-Raw-Data/main/LICENSE"
+            }
+        ],
+        "logos": {
+            "small": "",
+            "large": ""
+        },
+        "keywords": [
+            "raw",
+            "JSON",
+            "query",
+            "data"
+        ],
+        "version": "%VERSION%",
+        "updated": "%TODAY%"
+    },
+    "dependencies": {
+        "grafanaDependency": ">=7.0.0"
+    }
+}

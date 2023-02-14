@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "build": "tsc src/*.tsx --jsx react --esModuleInterop --outDir dist && cp src/plugin.json dist/",
+    "sign": "npx --yes @grafana/sign-plugin@latest",
+    "clean": "rm -rfv node_modules package-lock.json yarn.lock dist"
+  },
+  "dependencies": {
+    "@grafana/data": "latest",
+    "@types/react": "latest",
+    "@types/lodash": "latest",
+    "@types/node": "latest",
+    "@types/jquery": "latest"
+  }
+}
