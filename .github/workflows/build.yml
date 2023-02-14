@@ -1,0 +1,31 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Setup Node Environment
+        uses: actions/setup-node@v3
+      - name: Install Dependencies
+        run: yarn install
+      - name: Compile Project
+        run: yarn build
+      - name: Compatibility Check
+        run: npx @grafana/levitate@latest is-compatible --path src/module.ts --target @grafana/data,@grafana/ui,@grafana/runtime
+      - name: Package Project
+        run: |
+          mv dist ventura-rawdata-panel
+          zip ventura-rawdata-panel.zip ventura-rawdata-panel -r
+          md5 ventura-rawdata-panel.zip > ventura-rawdata-panel.txt
+          cat ventura-rawdata-panel.txt
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ventura-rawdata-panel
+          path: |
+            ventura-rawdata-panel.zip
+            ventura-rawdata-panel.txt
