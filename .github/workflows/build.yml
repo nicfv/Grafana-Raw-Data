@@ -7,7 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        uses: echo 'Hello!' >> $GITHUB_STEP_SUMMARY
+        run: |
+          echo 'Hello!' >> $GITHUB_STEP_SUMMARY
+          cat $GITHUB_STEP_SUMMARY
+          echo $GITHUB_STEP_SUMMARY
       - name: Checkout Repository
         uses: actions/checkout@v3
       - name: Setup Node Environment
