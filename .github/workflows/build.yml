@@ -10,6 +10,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Node Environment
         uses: actions/setup-node@v3
+      - name: Setup Go Environment
+        uses: actions/setup-go@v3
       - name: Install Dependencies
         run: yarn install
       - name: Compile Project
@@ -21,6 +23,13 @@ jobs:
           mv dist ventura-rawdata-panel
           zip ventura-rawdata-panel.zip ventura-rawdata-panel -r
           md5sum ventura-rawdata-panel.zip >> $GITHUB_STEP_SUMMARY
+      - name: Validate Plugin
+        run: |
+          git clone https://github.com/grafana/plugin-validator
+          pushd ./plugin-validator/pkg/cmd/plugincheck2
+          go install
+          popd
+          plugincheck2 -config ./plugin-validator/config/default.yaml ventura-rawdata-panel.zip
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:

@@ -20,8 +20,8 @@
             }
         ],
         "logos": {
-            "small": "",
-            "large": ""
+            "small": "icon.svg",
+            "large": "icon.svg"
         },
         "keywords": [
             "raw",
