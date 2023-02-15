@@ -9,7 +9,9 @@ jobs:
       - name: Test
         run: |
           echo 'Hello!' >> $GITHUB_STEP_SUMMARY
+          echo cat
           cat $GITHUB_STEP_SUMMARY
+          echo echo
           echo $GITHUB_STEP_SUMMARY
       - name: Checkout Repository
         uses: actions/checkout@v3
