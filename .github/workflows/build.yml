@@ -20,17 +20,18 @@ jobs:
         run: yarn install
       - name: Compile Project
         run: yarn build
-      - name: Update Build Date and Version
+      - name: Export Variables
         run: |
           echo "VERSION=$(grep -m1 -oe '[0-9\.]\+' < CHANGELOG.md)" >> "${GITHUB_ENV}"
-          echo "version is ${{ env.VERSION }}"
+          echo "ZIPPED=${{ env.ID }}-${{ env.VERSION }}.zip" >> "${GITHUB_ENV}"
+      - name: Update Build Date and Version
+        run: |
           sed -i "s/%TODAY%/$(date +%Y-%m-%d)/" dist/plugin.json
           sed -i "s/%VERSION%/${{ env.VERSION }}/" dist/plugin.json
       - name: Compatibility Check
         run: npx --yes @grafana/levitate@latest is-compatible --path src/module.tsx --target @grafana/data,@grafana/ui,@grafana/runtime
       - name: Package Project
         run: |
-          echo "ZIPPED=${{ env.ID }}-${{ env.VERSION }}.zip" >> "${GITHUB_ENV}"
           mv dist "${{ env.ID }}"
           zip "${{ env.ZIPPED }}" "${{ env.ID }}" -r
           md5sum "${{ env.ZIPPED }}" >> $GITHUB_STEP_SUMMARY
