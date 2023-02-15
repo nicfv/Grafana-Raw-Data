@@ -2,8 +2,6 @@ on:
   push:
     branches:
       - main
-    tags:
-      - v*
 jobs:
   build-project:
     runs-on: ubuntu-latest
@@ -30,7 +28,7 @@ jobs:
         run: |
           mv dist ventura-rawdata-panel
           zip ventura-rawdata-panel.zip ventura-rawdata-panel -r
-          md5sum ventura-rawdata-panel.zip > ventura-rawdata-panel.md5
+          md5sum ventura-rawdata-panel.zip >> $GITHUB_STEP_SUMMARY
       - name: Validate Plugin
         run: |
           git clone https://github.com/grafana/plugin-validator
@@ -38,10 +36,8 @@ jobs:
           go install
           popd
           plugincheck2 -config ./plugin-validator/config/default.yaml ventura-rawdata-panel.zip
-      - name: Create Github release
-        uses: softprops/action-gh-release@v1
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
         with:
-          generate_release_notes: true
-          files: |
-            ventura-rawdata-panel.zip
-            ventura-rawdata-panel.md5
+          name: ventura-rawdata-panel
+          path: ventura-rawdata-panel.zip
