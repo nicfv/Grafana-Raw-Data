@@ -17,15 +17,9 @@ jobs:
       - name: Compatibility Check
         run: npx --yes @grafana/levitate@latest is-compatible --path src/module.tsx --target @grafana/data,@grafana/ui,@grafana/runtime
       - name: Package Project
-        run: |
-          mv dist ventura-rawdata-panel
-          zip ventura-rawdata-panel.zip ventura-rawdata-panel -r
-          md5sum ventura-rawdata-panel.zip > ventura-rawdata-panel.txt
-          cat ventura-rawdata-panel.txt
+        run: md5sum ventura-rawdata-panel.zip
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: ventura-rawdata-panel
-          path: |
-            ventura-rawdata-panel.zip
-            ventura-rawdata-panel.txt
+          path: dist
