@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "tsc src/*.tsx --jsx react --esModuleInterop --outDir dist && cp src/plugin.json src/icon.svg README.md CHANGELOG.md LICENSE dist",
+    "build": "tsc src/*.tsx --jsx react --esModuleInterop --outDir dist && cp src/plugin.json src/icon.svg README.md dist",
     "sign": "npx --yes @grafana/sign-plugin@latest",
     "clean": "rm -rf node_modules package-lock.json yarn.lock dist"
   },
