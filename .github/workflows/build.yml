@@ -20,24 +20,26 @@ jobs:
         run: yarn build
       - name: Update Build Date and Version
         run: |
+          echo "VERSION=$(grep -m1 -oe '[0-9\.]\+' < CHANGELOG.md)" >> "${GITHUB_ENV}"
           sed -i "s/%TODAY%/$(date +%Y-%m-%d)/" dist/plugin.json
-          sed -i "s/%VERSION%/$(grep -m1 -oe '[0-9\.]\+' < CHANGELOG.md)/" dist/plugin.json
+          sed -i "s/%VERSION%/${{ env.VERSION }}/" dist/plugin.json
       - name: Compatibility Check
         run: npx --yes @grafana/levitate@latest is-compatible --path src/module.tsx --target @grafana/data,@grafana/ui,@grafana/runtime
       - name: Package Project
         run: |
-          mv dist ventura-rawdata-panel
-          zip ventura-rawdata-panel.zip ventura-rawdata-panel -r
-          md5sum ventura-rawdata-panel.zip >> $GITHUB_STEP_SUMMARY
+          ID='ventura-rawdata-panel'
+          echo "ZIPPED=${ID}-${{ env.VERSION }}.zip" >> "${GITHUB_ENV}"
+          mv dist "${ID}"
+          zip "${{ env.ZIPPED }}" "${ID}" -r
+          md5sum "${{ env.ZIPPED }}" >> $GITHUB_STEP_SUMMARY
       - name: Validate Plugin
         run: |
           git clone https://github.com/grafana/plugin-validator
           pushd ./plugin-validator/pkg/cmd/plugincheck2
           go install
           popd
-          plugincheck2 -config ./plugin-validator/config/default.yaml ventura-rawdata-panel.zip
+          plugincheck2 -config ./plugin-validator/config/default.yaml "${{ env.ZIPPED }}"
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ventura-rawdata-panel
-          path: ventura-rawdata-panel.zip
+          path: "${{ env.ZIPPED }}"
