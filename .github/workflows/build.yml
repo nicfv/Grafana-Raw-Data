@@ -21,7 +21,7 @@ jobs:
       - name: Export Variables
         run: |
           PLUGIN_ID="$(grep "\"id\"" dist/plugin.json | sed 's/.*: *\"\(.*\)\".*/\1/')"
-          echo "ID=$(echo PLUGIN_ID)" >> "${GITHUB_ENV}"
+          echo "ID=$(echo "${PLUGIN_ID}")" >> "${GITHUB_ENV}"
           echo "VERSION=$(grep -m1 -oe '[0-9\.]\+' < CHANGELOG.md)" >> "${GITHUB_ENV}"
           echo "ZIPPED=${{ env.ID }}-${{ env.VERSION }}.zip" >> "${GITHUB_ENV}"
       - name: Update Build Date and Version
