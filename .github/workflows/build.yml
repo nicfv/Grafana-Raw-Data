@@ -21,7 +21,7 @@ jobs:
       - name: Update Build Date and Version
         run: |
           sed -i "s/%TODAY%/$(date +%Y-%m-%d)/" dist/plugin.json
-          sed -i "s/%VERSION%/$(grep -m1 -oe '[0-9\.]+' < CHANGELOG.md)/" dist/plugin.json
+          sed -i "s/%VERSION%/$(grep -m1 -oe '[0-9\.]\+' < CHANGELOG.md)/" dist/plugin.json
       - name: Compatibility Check
         run: npx --yes @grafana/levitate@latest is-compatible --path src/module.tsx --target @grafana/data,@grafana/ui,@grafana/runtime
       - name: Package Project
