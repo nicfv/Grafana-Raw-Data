@@ -44,7 +44,7 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: '1.19'
-        name: Package Project
+      - name: Package Project
         run: |
           zip "${{ env.PROJECT }}.zip" "${{ env.ID }}" -r
           md5sum "${{ env.PROJECT }}.zip" >> "${GITHUB_STEP_SUMMARY}"
