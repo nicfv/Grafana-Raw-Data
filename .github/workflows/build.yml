@@ -52,7 +52,7 @@ jobs:
         run: |
           cd "$(ls)"
           zip archive.zip . -r
-          md5sum archive.zip >> "${GITHUB_STEP_SUMMARY}"
+          md5sum ../archive.zip >> "${GITHUB_STEP_SUMMARY}"
       - name: Validate Plugin
         run: |
           git clone https://github.com/grafana/plugin-validator
