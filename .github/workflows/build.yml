@@ -52,7 +52,7 @@ jobs:
         run: |
           ls
           FILES=($(ls))
-          FILE="${FILES[1]}"
+          FILE="${FILES[0]}"
           echo "My file is: '${FILE}'"
           zip archive.zip "${FILE}" -r
           md5sum archive.zip >> "${GITHUB_STEP_SUMMARY}"
