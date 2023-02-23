@@ -51,7 +51,7 @@ jobs:
       - name: Package Project
         run: |
           cd "$(ls)"
-          zip archive.zip . -r
+          zip ../archive.zip . -r
           md5sum ../archive.zip >> "${GITHUB_STEP_SUMMARY}"
       - name: Validate Plugin
         run: |
