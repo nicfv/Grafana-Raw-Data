@@ -53,8 +53,9 @@ jobs:
           ls
           FILES=($(ls))
           FILE="${FILES[0]}"
+          echo "My files are: '${FILES}'"
           echo "My file is: '${FILE}'"
-          zip archive.zip "${FILE}" -r
+          zip archive.zip . -r
           md5sum archive.zip >> "${GITHUB_STEP_SUMMARY}"
       - name: Validate Plugin
         run: |
