@@ -36,6 +36,7 @@ jobs:
           name: "${{ env.PROJECT }}"
           path: "${{ env.PROJECT }}"
   validate-plugin:
+    needs: build-project
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifact
