@@ -45,11 +45,12 @@ function pseudoJsonPath(obj: any, path: string): any {
 }
 
 interface RawDataConfig {
-    jp: string;
+    path: string;
     indent: number;
+    meta: string;
 }
 
-const MyPanel: React.FC<PanelProps<RawDataConfig>> = ({ options, data, height }) => <CodeEditor height={height - 10} readOnly={true} showLineNumbers={true} value={JSON.stringify(pseudoJsonPath(data, options.jp ?? '*'), undefined, options.indent)} monacoOptions={{ tabSize: options.indent, detectIndentation: false }} language='json' />;
+const MyPanel: React.FC<PanelProps<RawDataConfig>> = panelProps => <CodeEditor height={panelProps.height - 10} readOnly={true} showLineNumbers={true} value={JSON.stringify(pseudoJsonPath(panelProps[panelProps.options.meta], panelProps.options.path ?? '*'), undefined, panelProps.options.indent)} monacoOptions={{ tabSize: panelProps.options.indent, detectIndentation: false }} language='json' />;
 
 export const plugin = new PanelPlugin<RawDataConfig>(MyPanel).setPanelOptions(builder => builder
     .addSliderInput({
@@ -65,11 +66,73 @@ export const plugin = new PanelPlugin<RawDataConfig>(MyPanel).setPanelOptions(bu
     })
     .addTextInput({
         name: 'JSON Path',
-        path: 'jp',
-        description: 'Set the output JSON path.',
+        path: 'path',
+        description: 'Set the output JSON path. Use `.` to separate fields, `%.` to escape periods, `[i]` where `i` is an integer to select a single item in an array, and `.*` and `[*]` are wildcards that will select all items in an array.',
         defaultValue: '*',
         settings: {
             placeholder: '*',
+        }
+    })
+    .addSelect({
+        name: 'Metadata Selector',
+        path: 'meta',
+        description: 'Select which panel metadata to display.',
+        defaultValue: 'data',
+        settings: {
+            allowCustomValue: false,
+            isClearable: false,
+            options: [
+                {
+                    label: 'Data',
+                    value: 'data',
+                    description: 'Result set of panel queries',
+                },
+                {
+                    label: 'ID',
+                    value: 'id',
+                    description: 'ID of the panel within the current dashboard',
+                },
+                {
+                    label: 'Time Range',
+                    value: 'timeRange',
+                    description: 'Time range of the current dashboard',
+                },
+                {
+                    label: 'Time Zone',
+                    value: 'timeZone',
+                    description: 'Time zone of the current dashboard',
+                },
+                {
+                    label: 'Options',
+                    value: 'options',
+                    description: 'User selected panel options',
+                },
+                {
+                    label: 'Transparent',
+                    value: 'transparent',
+                    description: 'Indicates whether or not panel should be rendered transparent',
+                },
+                {
+                    label: 'Width',
+                    value: 'width',
+                    description: 'Current width of the panel',
+                },
+                {
+                    label: 'Height',
+                    value: 'height',
+                    description: 'Current height of the panel',
+                },
+                {
+                    label: 'Field Configuration Source',
+                    value: 'fieldConfig',
+                    description: 'Field options configuration',
+                },
+                {
+                    label: 'Title',
+                    value: 'title',
+                    description: 'Panel title',
+                },
+            ]
         }
     })
 );

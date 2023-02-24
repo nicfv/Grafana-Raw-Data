@@ -6,12 +6,6 @@ This is a simple Grafana panel plugin that supports any query and outputs the ra
 
 This panel is designed to assist in plugin development and for deep exploration in data sources.
 
-## In-Progress
-
-- ~~Improve the UI by using Grafana's built-in `<CodeEditor>` React component~~
-- ~~Allow the use of JSON paths to customize the output~~
-- Give the user the option to display other metadata
-
 ## Pseudo JSON Path
 
 Using the pseudo-JSON path, you can extract data out of larger objects. See below for a list of special characters and a short list of examples.

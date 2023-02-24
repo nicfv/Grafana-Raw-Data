@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.0
+
+- Remove in-progress items in `README.md`
+- Add metadata item selector to render different panel metadata
+
 ## 1.3.1
 
 - Remove code comments in production builds (decrease file size)
