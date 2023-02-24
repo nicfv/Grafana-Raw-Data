@@ -8,6 +8,6 @@ This panel is designed to assist in plugin development and for deep exploration 
 
 ## In-Progress
 
-- Improve the UI by using Grafana's built-in `<CodeEditor>` React component
+- ~~Improve the UI by using Grafana's built-in `<CodeEditor>` React component~~
 - Allow the use of JSON paths to customize the output
 - Give the user the option to display other metadata

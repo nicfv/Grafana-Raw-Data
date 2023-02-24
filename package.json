@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@grafana/data": "latest",
-    "@types/react": "latest",
+    "@grafana/ui": "latest",
     "@types/lodash": "latest",
     "@types/node": "latest",
     "@types/jquery": "latest"
