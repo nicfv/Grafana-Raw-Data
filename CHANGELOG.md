@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.1
+
+- Add version number in `package.json` (required by plugin validator)
+
 ## 1.4.0
 
 - Remove in-progress items in `README.md`
