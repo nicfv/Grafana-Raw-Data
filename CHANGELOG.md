@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0
+
+- Create simple pseudo-JSON path functionality to extract data from objects
+- Allow the user to set an indentation size for visibility
+
 ## 1.2.0
 
 - Use the `<CodeEditor>` builtin Grafana React component
