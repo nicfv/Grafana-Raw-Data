@@ -1,5 +1,4 @@
 {
-  "version": "%VERSION%",
   "scripts": {
     "build": "tsc src/*.tsx --jsx react --esModuleInterop --removeComments --outDir dist && cp src/plugin.json src/icon.svg README.md CHANGELOG.md LICENSE dist",
     "sign": "npx --yes @grafana/sign-plugin@latest",

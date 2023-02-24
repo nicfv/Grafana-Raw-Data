@@ -26,7 +26,6 @@ jobs:
         run: |
           sed -i "s/%TODAY%/$(date +%Y-%m-%d)/" dist/plugin.json
           sed -i "s/%VERSION%/${{ env.VERSION }}/" dist/plugin.json
-          sed -i "s/%VERSION%/${{ env.VERSION }}/" package.json
       - name: Compatibility Check
         run: npx --yes @grafana/levitate@latest is-compatible --path src/module.tsx --target @grafana/data,@grafana/ui,@grafana/runtime
       - name: Package Project
