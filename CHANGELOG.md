@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1
+
+- Remove code comments in production builds (decrease file size)
+
 ## 1.3.0
 
 - Create simple pseudo-JSON path functionality to extract data from objects
