@@ -50,14 +50,7 @@ interface RawDataConfig {
     meta: string;
 }
 
-const MyPanel: React.FC<PanelProps<RawDataConfig>> = panelProps => {
-    try {
-        return (<CodeEditor height={panelProps.height - 10} readOnly={true} showLineNumbers={true} value={JSON.stringify(pseudoJsonPath(panelProps[panelProps.options.meta], panelProps.options.path ?? '*'), undefined, panelProps.options.indent)} monacoOptions={{ tabSize: panelProps.options.indent, detectIndentation: false }} language='json' />);
-    }
-    catch (e) {
-        return (<div className='panel-empty'>{e}</div>);
-    }
-};
+const MyPanel: React.FC<PanelProps<RawDataConfig>> = panelProps => <CodeEditor height={panelProps.height - 10} readOnly={true} showLineNumbers={true} showMiniMap={true} value={JSON.stringify(pseudoJsonPath(panelProps[panelProps.options.meta], panelProps.options.path ?? '*'), undefined, panelProps.options.indent)} monacoOptions={{ tabSize: panelProps.options.indent, detectIndentation: false }} language='json' />;
 
 export const plugin = new PanelPlugin<RawDataConfig>(MyPanel).setPanelOptions(builder => builder
     .addSliderInput({
